@@ -26,21 +26,19 @@ class CameraState {
 }
 
 class ThirdPersonCameraControls {
-  enabled = true;
+  enabled = true
   // How far you can zoom in and out ( PerspectiveCamera only )
-  minDistance = 0;
-  maxDistance = Infinity;
+  minDistance = 0
+  maxDistance = Infinity
 
   // How far you can orbit vertically, upper and lower limits.
   // Range is 0 to Math.PI radians.
-  minPolarAngle = 0;
-  maxPolarAngle = Math.PI;
-
-  enableZoom = true;
-  zoomSpeed = 1.75;
-
-  enableRotate = true;
-  rotateSpeed = 1.0;
+  minPolarAngle = 0
+  maxPolarAngle = 1.5
+  enableZoom = true
+  zoomSpeed = 1.75
+  enableRotate = true
+  rotateSpeed = 1.0
 
   // "target" sets the location of focus, where the object orbits around
   targetOffset = new THREE.Vector3(0, 0, 0);
@@ -197,44 +195,33 @@ class ThirdPersonCameraControls {
 
   handleMouseMoveRotate(event) {
     if (document.pointerLockElement === this.domElement) {
-      this.rotateEnd.x += event.movementX * 0.25;
-      this.rotateEnd.y += event.movementY * 0.25 * 0.8;
+      this.rotateEnd.x += event.movementX * 0.25
+      if (this.camera.position.y > 1.5 || event.movementY > 0)
+        // able to rotate
+        this.rotateEnd.y += event.movementY * 0.25 * 0.8
     } else {
-      this.domElement.requestPointerLock();
-      this.domElement.style.cursor = 'none';
-      this.rotateEnd.set(event.clientX, event.clientY);
+      this.domElement.requestPointerLock()
+      this.domElement.style.cursor = 'none'
+      this.rotateEnd.set(event.clientX, event.clientY)
     }
-    this.handleApplyRotate();
+    this.handleApplyRotate()
   }
-
   handleMouseWheel(event) {
     if (event.deltaY < 0) {
-      this.zoomIn(this.getZoomScale());
+      this.zoomIn(this.getZoomScale())
     } else if (event.deltaY > 0) {
-      this.zoomOut(this.getZoomScale());
+      this.zoomOut(this.getZoomScale())
     }
   }
-
   handleTouchStartRotate() {
     if (this.cameraState.pointers.length === 1) {
-      this.rotateStart.set(
-        this.cameraState.pointers[0].pageX,
-        this.cameraState.pointers[0].pageY
-      );
+      this.rotateStart.set(this.cameraState.pointers[0].pageX, this.cameraState.pointers[0].pageY)
     } else {
-      const x =
-        0.5 *
-        (this.cameraState.pointers[0].pageX +
-          this.cameraState.pointers[1].pageX);
-      const y =
-        0.5 *
-        (this.cameraState.pointers[0].pageY +
-          this.cameraState.pointers[1].pageY);
-
-      this.rotateStart.set(x, y);
+      const x = 0.5 * (this.cameraState.pointers[0].pageX + this.cameraState.pointers[1].pageX)
+      const y = 0.5 * (this.cameraState.pointers[0].pageY + this.cameraState.pointers[1].pageY)
+      this.rotateStart.set(x, y)
     }
   }
-
   handleTouchStartZoom() {
     const dx =
       this.cameraState.pointers[0].pageX - this.cameraState.pointers[1].pageX;

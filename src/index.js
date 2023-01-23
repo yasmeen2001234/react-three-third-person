@@ -83,9 +83,14 @@ const ThirdPersonCharacterControls = ({
       movement.applyMatrix4(mtx);
 
       // then apply velocity to collider influenced by model groups rotation
-      const baseVelocity = inputs.down ? charVelocity / 2 : charVelocity;
-      xVelocity = movement.x * baseVelocity;
-      zVelocity = movement.z * baseVelocity;
+      const baseVelocity = inputs.down ? charVelocity / 2 : charVelocity
+      if (inputs.run) {
+        zVelocity = 2 * movement.z * baseVelocity
+        xVelocity = 2 * movement.x * baseVelocity
+      } else {
+        xVelocity = movement.x * baseVelocity
+        zVelocity = movement.z * baseVelocity
+      }
     }
 
     collider.velocity.set(xVelocity, velocity.current[1], zVelocity);

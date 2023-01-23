@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
 
 const defaultMap = {
-  up: "w",
-  down: "s",
-  right: "d",
-  left: "a",
-  jump: " ",
-  walk: "Shift",
+  up: 'w',
+  down: 's',
+  right: 'd',
+  left: 'a',
+  jump: ' ',
+  run: 'e',
 };
 
 const getInputFromKeyboard = (keyMap, keyPressed) => {

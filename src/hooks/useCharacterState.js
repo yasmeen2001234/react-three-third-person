@@ -5,23 +5,23 @@ const getAnimationFromUserInputs = (inputs) => {
   const { up, down, right, left, isMouseLooking } = inputs;
 
   if (up && !down) {
-    return 'run';
+    if (run) {
+      return 'run'
+    }
+    return 'walk'
   }
 
   if (down && !up) {
-    return 'backpedal';
+    return 'backpedal'
   }
-
   if (!right && left) {
-    return isMouseLooking ? 'strafeLeft' : 'turnLeft';
+    return isMouseLooking ? 'strafeLeft' : 'turnLeft'
   }
-
   if (!left && right) {
-    return isMouseLooking ? 'strafeRight' : 'turnRight';
+    return isMouseLooking ? 'strafeRight' : 'turnRight'
   }
-
-  return 'idle';
-};
+  return 'idle'
+}
 
 export default function useCharacterState(inputs = {}, position, mixer) {
   const [characterState, setCharacterState] = useState({
@@ -77,23 +77,24 @@ export default function useCharacterState(inputs = {}, position, mixer) {
   }, [up, down, left, right]);
 
   useEffect(() => {
-    if (isJumping || inAir) {
-      return;
+    if (isJumping || inAir ) {
+      return
     }
     const newState = {
       animation: getAnimationFromUserInputs(inputs),
-    };
-
+    }
     if (jump && !jumpPressed) {
-      newState.animation = 'jump';
-      newState.isJumping = true;
+      newState.animation = 'jump'
+      newState.isJumping = true
+    }
+    if (jumpPressed || inAir) {
+      newState.isJumping = false
     }
 
     // let landing animation playout if we're still landing
     if (isLanding && newState.animation === 'idle') {
-      return;
+      return
     }
-
     setCharacterState((prevState) => ({
       ...prevState,
       isLanding: false,
