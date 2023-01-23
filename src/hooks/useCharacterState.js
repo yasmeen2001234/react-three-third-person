@@ -2,7 +2,7 @@ import { useRaycastClosest } from '@react-three/cannon';
 import { useState, useEffect } from 'react';
 
 const getAnimationFromUserInputs = (inputs) => {
-  const { up, down, right, left, isMouseLooking } = inputs;
+  const { up, down, right, left, isMouseLooking , run} = inputs;
 
   if (up && !down) {
     if (run) {
@@ -34,7 +34,7 @@ export default function useCharacterState(inputs = {}, position, mixer) {
   const [jumpPressed, setJumpPressed] = useState(false);
   const [landed, setLanded] = useState();
 
-  const { up, down, right, left, jump, isMouseLooking } = inputs;
+  const { up, down, right, left, jump, isMouseLooking ,run} = inputs;
   const { isJumping, inAir, isLanding } = characterState;
 
   useEffect(() => {
