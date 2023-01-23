@@ -11,8 +11,16 @@ export default function useCapsuleCollider(radius = 0.5) {
       name: 'no-fric-zone',
     },
     shapes: [
-      { type: 'Sphere', position: [0, radius, 0], args: [radius] },
-      { type: 'Sphere', position: [0, radius * 4.2, 0], args: [radius] },
+      {
+        type: 'Sphere',
+        position: [0, 0.3, 0],
+        args: [radius],
+      },
+      {
+        type: 'Sphere',
+        position: [0, radius * 4.2, 0],
+        args: [radius],
+      },
       {
         type: 'Sphere',
         position: [0, radius * 5 - radius * 2.3, 0],

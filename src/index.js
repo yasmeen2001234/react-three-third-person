@@ -98,7 +98,7 @@ const ThirdPersonCharacterControls = ({
     // after applying x/z velocity, apply y velocity if user has jumped while grounded
     const isGrounded = Math.abs(velocity.current[1].toFixed(2)) === 0;
     if (animation === 'jump' && isGrounded) {
-      collider.velocity.set(velocity.current[0], 8, velocity.current[2]);
+      collider.velocity.set(velocity.current[0], 8.5, velocity.current[2]);
     }
 
     // rotate character model inside model group
@@ -121,7 +121,7 @@ const ThirdPersonCharacterControls = ({
   }, [animation, actions]);
 
   return (
-    <group ref={modelRef} rotation={[0, Math.PI, 0]} {...characterProps}>
+    <group ref={modelRef} rotation={[0, 0, 0]} {...characterProps}>
       <Suspense fallback={() => null}>
         <primitive object={characterObj} dispose={null} />
       </Suspense>
