@@ -2,20 +2,20 @@ import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Physics, Debug, useBox } from "@react-three/cannon";
 import { useFBX } from '@react-three/drei'
-import ThirdPersonCharacterControls from "react-three-third-person";
+import ThirdPersonCharacterControls from "@bonuz/react-three-third-person";
 
 const BASE_ANIMATIONS_PATH =
   "./models";
 
 const animationPaths = {
-  idle: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
-  walk: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
-  run: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
-  jump: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
-  inAir: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
-  backpedal: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
-  turnLeft: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
-  turnRight: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  idle: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  walk: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  run: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  jump: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  inAir: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  backpedal: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  turnLeft: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  turnRight: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
 
 };
 

@@ -112,7 +112,21 @@ export default function useKeyboardInput(inputManager, userKeyMap = {}) {
          ...prevState,
          up: true,
          down: false,
-       })); 
+       })); }
+      else if (
+        data?.direction?.y === "up" &&
+        data?.angle.degree > 45 &&
+        data?.angle.degree < 135 &&
+        data?.vector.y > 0.99
+      ) {
+        setInputsPressed((prevState) => ({
+          ...prevState,
+          run: true,
+          up: false,
+          down: false,
+        }));
+
+
      } else if (
        data?.direction?.y === "down" &&
        data?.angle.degree > 225 &&
