@@ -2,7 +2,7 @@ import { useRaycastClosest } from '@react-three/cannon';
 import { useState, useEffect } from 'react';
 
 const getAnimationFromUserInputs = (inputs) => {
-  const { up, down, right, left, isMouseLooking , run} = inputs;
+  const { up, down, right, left, isMouseLooking , run } = inputs;
 
   if (up && !down) {
     if (run) {
@@ -15,10 +15,10 @@ const getAnimationFromUserInputs = (inputs) => {
     return 'backpedal'
   }
   if (!right && left) {
-    return isMouseLooking ? 'strafeLeft' : 'turnLeft'
+    return isMouseLooking ? 'turnLeft' : 'turnLeft'
   }
   if (!left && right) {
-    return isMouseLooking ? 'strafeRight' : 'turnRight'
+    return isMouseLooking ? 'turnRight' : 'turnLeft'
   }
   return 'idle'
 }
@@ -34,7 +34,7 @@ export default function useCharacterState(inputs = {}, position, mixer) {
   const [jumpPressed, setJumpPressed] = useState(false);
   const [landed, setLanded] = useState();
 
-  const { up, down, right, left, jump, isMouseLooking ,run} = inputs;
+  const { up, down, right, left, jump, isMouseLooking , run } = inputs;
   const { isJumping, inAir, isLanding } = characterState;
 
   useEffect(() => {
@@ -63,7 +63,7 @@ export default function useCharacterState(inputs = {}, position, mixer) {
       setCharacterState((prevState) => ({
         ...prevState,
         inAir: false,
-        animation: 'landing',
+        animation: 'idle',
         isLanding: true,
       }));
     }
@@ -72,9 +72,9 @@ export default function useCharacterState(inputs = {}, position, mixer) {
   useEffect(() => {
     setCharacterState((prevState) => ({
       ...prevState,
-      isMoving: up || down || left || right,
+      isMoving: up || down || left || right || run,
     }));
-  }, [up, down, left, right]);
+  }, [up, down, left, right ,run]);
 
   useEffect(() => {
     if (isJumping || inAir ) {
@@ -100,7 +100,7 @@ export default function useCharacterState(inputs = {}, position, mixer) {
       isLanding: false,
       ...newState,
     }));
-  }, [up, down, left, right, jump, isMouseLooking, isJumping, inAir]);
+  }, [up, down, left, run, right, jump, isMouseLooking, isJumping, inAir]);
 
   useEffect(() => {
     const checker = () => {

@@ -10,7 +10,6 @@ const GLTF_LOADER = new GLTFLoader();
 async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
-    //play each animation
   }
 };
 
@@ -49,13 +48,10 @@ function useThirdPersonAnimations(
         'walk',
         'run',
         'jump',
-        'landing',
         'inAir',
         'backpedal',
         'turnLeft',
-        'turnRight',
-        'strafeLeft',
-        'strafeRight',
+        'turnRight'
       ];
       await asyncForEach(keys, async (key) => {
         const fileExt = animationPaths[key].split('.').pop();
@@ -103,7 +99,7 @@ function useThirdPersonAnimations(
               actualRef.current
             );
 
-            const clampers = ['jump', 'landing'];
+            const clampers = ['jump', 'idle'];
             if (clampers.includes(clip.name)) {
               lazyActions.current[clip.name].setLoop(2200); // 2200 = THREE.LoopOnce
               lazyActions.current[clip.name].clampWhenFinished = true;

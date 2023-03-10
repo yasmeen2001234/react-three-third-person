@@ -1,13 +1,56 @@
 import { useState, useEffect } from "react";
+import nipplejs from "nipplejs";
+
 
 const defaultMap = {
-  up: 'w',
-  down: 's',
-  right: 'd',
-  left: 'a',
-  jump: ' ',
-  run: 'e',
+  up: "w",
+  down: "s",
+  right: "d",
+  left: "a",
+  jump: " ",
+  walk: "e",
 };
+var manager=null;
+window.addEventListener('load', function () {
+
+const myZone = document.createElement('div');
+myZone.style.width = '200px';
+myZone.style.height = '200px';
+myZone.style.border = '1px solid black';
+
+// Append the new div to the body of the document
+document.body.appendChild(myZone);
+
+
+
+const options = {
+  zone: myZone,
+  size: 150,
+  multitouch: true,
+  maxNumberOfNipples: 0,
+  mode: 'static',
+  restJoystick: true,
+  shape: 'circle',
+  position: { top: '60px', left: '60px' },
+  dynamicPage: true,
+};
+const div = document.createElement("div");
+div.id = "zone_button";
+document.body.appendChild(div);
+
+const button = document.createElement("button");
+button.id = "button";
+div.appendChild(button);
+const text = document.createElement("jumpingbutton");
+text.id = "JUMP";
+
+text.innerHTML = "JUMP";
+
+button.appendChild(text);
+
+ manager= nipplejs.create(options);
+});
+
 
 const getInputFromKeyboard = (keyMap, keyPressed) => {
   let inputFound = "";
@@ -58,6 +101,126 @@ export default function useKeyboardInput(inputManager, userKeyMap = {}) {
       setIsMouseLooking(false);
     }
   };
+   manager?.on("move", function (evt, data) {
+     if (
+       data?.direction?.y === "up" &&
+       data?.angle.degree > 45 &&
+       data?.angle.degree < 135
+     ) {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         up: true,
+         down: false,
+       }));
+     } else if (
+       data?.direction?.y === "down" &&
+       data?.angle.degree > 225 &&
+       data?.angle.degree < 315
+     ) {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         up: false,
+         down: true,
+       }));
+     } else if (
+       data?.direction?.x === "left" &&
+       data?.direction?.y === "up" &&
+       data?.angle.degree > 315 &&
+       data?.angle.degree < 45
+     ) {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         up: true,
+         down: false,
+         left: true,
+         right: false,
+       }));
+     } else if (
+       data?.direction?.x === "left" &&
+       data?.direction?.y === "down" &&
+       data?.angle.degree > 135 &&
+       data?.angle.degree < 225
+     ) {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         up: false,
+         down: true,
+         left: true,
+         right: false,
+       }));
+     } else if (
+       data?.direction?.x === "right" &&
+       data?.direction?.y === "up" &&
+       data?.angle.degree > 45 &&
+       data?.angle.degree < 135
+     ) {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         up: true,
+         down: false,
+         left: false,
+         right: true,
+       }));
+     } else if (
+       data?.direction?.x === "right" &&
+       data?.direction?.y === "down" &&
+       data?.angle.degree > 225 &&
+       data?.angle.degree < 315
+     ) {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         up: false,
+         down: true,
+         left: false,
+         right: true,
+       }));
+     } else if (
+       data?.direction?.x === "left" &&
+       data?.angle.degree > 135 &&
+       data?.angle.degree < 225
+     ) {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         left: true,
+         right: false,
+       }));
+     } else if (data?.direction?.x === "right") {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         left: false,
+         right: true,
+       }));
+     }
+   });
+
+   manager?.on("end", function (evt, data) {
+     setInputsPressed((prevState) => ({
+       ...prevState,
+       up: false,
+       down: false,
+     }));
+
+     setInputsPressed((prevState) => ({
+       ...prevState,
+       left: false,
+       right: false,
+     }));
+   });
+   document.addEventListener("click", function (event) {
+     if (event.target.id === "button" || event.target.id === "JUMP") {
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         jump: true,
+       }));
+       setTimeout(() => {
+         setInputsPressed((prevState) => ({
+           ...prevState,
+           jump: false,
+         }));
+       }, 1000);
+     }
+   });
+
 
   useEffect(() => {
     inputManager.subscribe("keydown", "character-controls", downHandler);
