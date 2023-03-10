@@ -24,14 +24,15 @@ document.body.appendChild(myZone);
 
 
 const options = {
-  zone: myZone,
+ 
   size: 150,
   multitouch: true,
   maxNumberOfNipples: 0,
   mode: 'static',
+  color: 'black',
   restJoystick: true,
   shape: 'circle',
-  position: { top: '60px', left: '60px' },
+  position: { left: '20px', bottom: '20px' },
   dynamicPage: true,
 };
 const div = document.createElement("div");

@@ -1,28 +1,31 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Physics, Debug, useBox } from "@react-three/cannon";
-import manny from "manny";
+import { useFBX } from '@react-three/drei'
 import ThirdPersonCharacterControls from "react-three-third-person";
 
 const BASE_ANIMATIONS_PATH =
-  "https://mannys-game.s3.amazonaws.com/third-person/animations";
+  "./models";
 
 const animationPaths = {
-  idle: `${BASE_ANIMATIONS_PATH}/idle.glb`,
-  walk: `${BASE_ANIMATIONS_PATH}/walk.glb`,
-  run: `${BASE_ANIMATIONS_PATH}/run.glb`,
-  jump: `${BASE_ANIMATIONS_PATH}/jump.glb`,
-  landing: `${BASE_ANIMATIONS_PATH}/landing.glb`,
-  inAir: `${BASE_ANIMATIONS_PATH}/falling_idle.glb`,
-  backpedal: `${BASE_ANIMATIONS_PATH}/backpedal.glb`,
-  turnLeft: `${BASE_ANIMATIONS_PATH}/turn_left.glb`,
-  turnRight: `${BASE_ANIMATIONS_PATH}/turn_right.glb`,
-  strafeLeft: `${BASE_ANIMATIONS_PATH}/strafe_left.glb`,
-  strafeRight: `${BASE_ANIMATIONS_PATH}/strafe_right.glb`,
+  idle: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  walk: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  run: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  jump: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  inAir: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  backpedal: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  turnLeft: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+  turnRight: `${BASE_ANIMATIONS_PATH}/Idle (5).glb`,
+
 };
 
 function ThirdPersonCharacter() {
-  const mannyObj = manny();
+  //const mannyObj = manny();
+  const characterObj = useFBX(`${BASE_ANIMATIONS_PATH}/Player_Idle.fbx`)
+  characterObj.scale.setScalar(0.01)
+  characterObj.rotation.set(-3.14, 0, -3.14)
+
+  characterObj.position.set(0, -0.4, 0)
 
   return (
     <ThirdPersonCharacterControls
@@ -32,7 +35,7 @@ function ThirdPersonCharacter() {
         maxDistance: 7,
         collisionFilterMask: 2,
       }}
-      characterObj={mannyObj}
+      characterObj={characterObj}
       animationPaths={animationPaths}
     />
   );
@@ -101,6 +104,8 @@ function Wall({ args, ...props }) {
 function App() {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
+       
+   
       <Canvas
         flat
         camera={{
