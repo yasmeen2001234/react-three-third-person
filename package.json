@@ -23,9 +23,7 @@
     "rollup": "^2.70.1"
   },
   "dependencies": {
-    "default-passive-events": "^2.0.0"
-    
-  },
+    "default-passive-events": "^2.0.0"},
   "peerDependencies": {
     "@react-three/cannon": ">=6",
     "@react-three/drei": ">=8",
