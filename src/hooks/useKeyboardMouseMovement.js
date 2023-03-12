@@ -35,6 +35,8 @@ const options = {
   position: { top: '60px', left: '60px' },
   dynamicPage: true,
 };
+
+console.log(options);
 const div = document.createElement("div");
 div.id = "zone_button";
 document.body.appendChild(div);

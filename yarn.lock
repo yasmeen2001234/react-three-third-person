@@ -1333,7 +1333,7 @@ picomatch@^2.2.2:
 
 "react-three-third-person@github:yasmeen2001234/react-three-third-person":
   version "0.4.06"
-  resolved "git+ssh://git@github.com/yasmeen2001234/react-three-third-person.git#55dce802a07b3e4ffb70289e7b48b848c444f6e4"
+  resolved "git+ssh://git@github.com/yasmeen2001234/react-three-third-person.git#77e7d97d3c9bab01c5d0abfc23efe8668053c7e0"
   dependencies:
     default-passive-events "^2.0.0"
 
