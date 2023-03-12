@@ -13,18 +13,12 @@ const defaultMap = {
 var manager=null;
 window.addEventListener('load', function () {
 
-const myZone = document.createElement('div');
-myZone.style.width = '200px';
-myZone.style.height = '200px';
-myZone.style.border = '1px solid black';
 
-// Append the new div to the body of the document
-document.body.appendChild(myZone);
+
 
 
 
 const options = {
-  zone: myZone,
   size: 150,
   multitouch: true,
   maxNumberOfNipples: 0,
@@ -36,7 +30,7 @@ const options = {
   dynamicPage: true,
 };
 
-console.log(options);
+
 const div = document.createElement("div");
 div.id = "zone_button";
 document.body.appendChild(div);
