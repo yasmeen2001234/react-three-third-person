@@ -122,9 +122,7 @@ const ThirdPersonCharacterControls = ({
 
   return (
     <>
-    <div id="div">
-    Hello
-    </div>
+    
     <group ref={modelRef} rotation={[0, 0, 0]} {...characterProps}>
       <Suspense fallback={() => null}>
         <primitive object={characterObj} dispose={null} />
