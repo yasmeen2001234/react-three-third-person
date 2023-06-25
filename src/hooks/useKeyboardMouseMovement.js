@@ -8,31 +8,33 @@ const defaultMap = {
   right: "d",
   left: "a",
   jump: " ",
-  run: "e",
+  walk: "e",
 };
 var manager=null;
+window.addEventListener('load', function () {
 
+const myZone = document.createElement('div');
+myZone.style.width = '200px';
+myZone.style.height = '200px';
+myZone.style.border = '1px solid black';
 
-
-  const joystickWrapper1 = document.getElementById('joystickWrapper1');
-  joystickWrapper1.style.display = 'none';
+// Append the new div to the body of the document
+document.body.appendChild(myZone);
 
 
 
 const options = {
-  zone: document.getElementById('joystickWrapper1'),
+  zone: myZone,
   size: 150,
   multitouch: true,
-  maxNumberOfNipples: 1,
+  maxNumberOfNipples: 0,
   mode: 'static',
   restJoystick: true,
-  zIndex: 9999,
-  color: 'red',
   shape: 'circle',
   position: { bottom: '60px', left: '60px' },
   dynamicPage: true,
-  
 };
+
 
 const div = document.createElement("div");
 div.id = "zone_button";
@@ -48,14 +50,8 @@ text.innerHTML = "JUMP";
 
 button.appendChild(text);
 
-div.style.display = "none";
  manager= nipplejs.create(options);
-
-// Set color gradient of joystick
-const joystickElement = document.querySelector('.nipple');
-joystickElement.style.backgroundImage = 'linear-gradient(to bottom, #ff0000, #0000ff)';
-
-
+});
 
 
 const getInputFromKeyboard = (keyMap, keyPressed) => {
@@ -113,28 +109,12 @@ export default function useKeyboardInput(inputManager, userKeyMap = {}) {
        data?.angle.degree > 45 &&
        data?.angle.degree < 135
      ) {
-     
-if( data?.vector?.y >= 0.99 ) {
-  setInputsPressed((prevState) => ({
-    ...prevState,
-    up: true,
-    run : true,
-    down: false,
-    left:false,
-    right:false
-  })); }
-  
-  else {
-    setInputsPressed((prevState) => ({
-      ...prevState,
-      up: true,
-      down: false,
-      run:false
-    }));
-  }
-
-     }
-     else if (
+       setInputsPressed((prevState) => ({
+         ...prevState,
+         up: true,
+         down: false,
+       }));
+     } else if (
        data?.direction?.y === "down" &&
        data?.angle.degree > 225 &&
        data?.angle.degree < 315
