@@ -27,8 +27,8 @@ const options = {
   mode: 'static',
   restJoystick: true,
   zIndex: 9999,
+  color: 'red',
   shape: 'circle',
-  color: 'linear-gradient(to bottom, #ce09ff, #ffa34e)',
   position: { bottom: '60px', left: '60px' },
   dynamicPage: true,
   
