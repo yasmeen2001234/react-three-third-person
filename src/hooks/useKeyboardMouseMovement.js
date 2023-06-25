@@ -8,28 +8,31 @@ const defaultMap = {
   right: "d",
   left: "a",
   jump: " ",
-  walk: "e",
+  run: "e",
 };
 var manager=null;
-window.addEventListener('load', function () {
 
 
 
+  const joystickWrapper1 = document.getElementById('joystickWrapper1');
+  joystickWrapper1.style.display = 'none';
 
 
 
 const options = {
+  zone: document.getElementById('joystickWrapper1'),
   size: 150,
   multitouch: true,
-  maxNumberOfNipples: 0,
+  maxNumberOfNipples: 1,
   mode: 'static',
   restJoystick: true,
   zIndex: 9999,
   shape: 'circle',
-  position: { top: '0px', left: '0px' },
+  color: 'linear-gradient(to bottom, #ce09ff, #ffa34e)',
+  position: { bottom: '60px', left: '60px' },
   dynamicPage: true,
+  
 };
-
 
 const div = document.createElement("div");
 div.id = "zone_button";
@@ -45,8 +48,14 @@ text.innerHTML = "JUMP";
 
 button.appendChild(text);
 
+div.style.display = "none";
  manager= nipplejs.create(options);
-});
+
+// Set color gradient of joystick
+const joystickElement = document.querySelector('.nipple');
+joystickElement.style.backgroundImage = 'linear-gradient(to bottom, #ff0000, #0000ff)';
+
+
 
 
 const getInputFromKeyboard = (keyMap, keyPressed) => {
@@ -104,12 +113,28 @@ export default function useKeyboardInput(inputManager, userKeyMap = {}) {
        data?.angle.degree > 45 &&
        data?.angle.degree < 135
      ) {
-       setInputsPressed((prevState) => ({
-         ...prevState,
-         up: true,
-         down: false,
-       }));
-     } else if (
+     
+if( data?.vector?.y >= 0.99 ) {
+  setInputsPressed((prevState) => ({
+    ...prevState,
+    up: true,
+    run : true,
+    down: false,
+    left:false,
+    right:false
+  })); }
+  
+  else {
+    setInputsPressed((prevState) => ({
+      ...prevState,
+      up: true,
+      down: false,
+      run:false
+    }));
+  }
+
+     }
+     else if (
        data?.direction?.y === "down" &&
        data?.angle.degree > 225 &&
        data?.angle.degree < 315

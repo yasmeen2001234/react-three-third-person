@@ -4,7 +4,7 @@ import { Physics, useBox } from "@react-three/cannon";
 import { useFBX } from '@react-three/drei'
 import ThirdPersonCharacterControls from "react-three-third-person";
 
-import "./App.css";
+
 
 
 const BASE_ANIMATIONS_PATH =

@@ -24,8 +24,8 @@
   },
   "dependencies": {
     "default-passive-events": "^2.0.0",
-    "nipplejs": "^0.10.1",
-    "react-three-third-person": "github:yasmeen2001234/react-three-third-person"
+    "nipplejs": "^0.10.1"
+    
   },
   "peerDependencies": {
     "@react-three/cannon": ">=6",
