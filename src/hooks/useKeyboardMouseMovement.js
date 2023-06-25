@@ -30,8 +30,9 @@ const options = {
   maxNumberOfNipples: 0,
   mode: 'static',
   restJoystick: true,
+  color : 'red',
   shape: 'circle',
-  position: { bottom: '60px', left: '60px' },
+  position: { top: '600px', left: '60px' },
   dynamicPage: true,
 };
 
