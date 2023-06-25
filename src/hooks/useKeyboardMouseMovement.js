@@ -26,7 +26,7 @@ const options = {
   restJoystick: true,
   zIndex: 9999,
   shape: 'circle',
-  position: { top: '60px', left: '60px' },
+  position: { top: '0px', left: '0px' },
   dynamicPage: true,
 };
 

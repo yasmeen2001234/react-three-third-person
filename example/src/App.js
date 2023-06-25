@@ -1,27 +1,30 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
-import { Physics, Debug, useBox } from "@react-three/cannon";
+import { Physics, useBox } from "@react-three/cannon";
 import { useFBX } from '@react-three/drei'
-import ThirdPersonCharacterControls from "@bonuz/react-three-third-person";
+import ThirdPersonCharacterControls from "react-three-third-person";
+
+import "./App.css";
+
 
 const BASE_ANIMATIONS_PATH =
   "./models";
 
 const animationPaths = {
-  idle: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
-  walk: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
-  run: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
-  jump: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
-  inAir: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
-  backpedal: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
-  turnLeft: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
-  turnRight: `${BASE_ANIMATIONS_PATH}/Idle (5).fbx`,
+  idle: `${BASE_ANIMATIONS_PATH}/Idle.fbx`,
+  walk: `${BASE_ANIMATIONS_PATH}/Walking.fbx`,
+  run: `${BASE_ANIMATIONS_PATH}/Running.fbx`,
+  jump: `${BASE_ANIMATIONS_PATH}/Jumping_Up.fbx`,
+  inAir: `${BASE_ANIMATIONS_PATH}/Falling_To_Landing.fbx`,
+  backpedal: `${BASE_ANIMATIONS_PATH}/Walking_Backwards.fbx`,
+  turnLeft: `${BASE_ANIMATIONS_PATH}/left_turn.fbx`,
+  turnRight: `${BASE_ANIMATIONS_PATH}/right_turn.fbx`,
 
 };
 
 function ThirdPersonCharacter() {
   //const mannyObj = manny();
-  const characterObj = useFBX(`${BASE_ANIMATIONS_PATH}/Player_Idle.fbx`)
+  const characterObj = useFBX(`${BASE_ANIMATIONS_PATH}/Player_alone.fbx`)
   characterObj.scale.setScalar(0.01)
   characterObj.rotation.set(-3.14, 0, -3.14)
 
@@ -74,7 +77,7 @@ function Floor() {
     <group>
       <mesh ref={ref}>
         <boxGeometry name="floor-box" />
-        <meshPhongMaterial opacity={0} transparent />
+        <meshPhongMaterial opacity={0} transparent color="black"/>
       </mesh>
       <gridHelper args={[25, 25]} />
     </group>
@@ -96,7 +99,7 @@ function Wall({ args, ...props }) {
   return (
     <mesh receiveShadow ref={ref} {...props}>
       <boxGeometry args={args} />
-      <meshPhongMaterial color="white" opacity={0.8} transparent />
+      <meshPhongMaterial color="red" opacity={0.8} transparent />
     </mesh>
   );
 }
@@ -116,7 +119,7 @@ function App() {
         }}
       >
         <Physics gravity={[0, -35, 0]}>
-          <Debug color="lime">
+          
             <Suspense fallback={null}>
               <ThirdPersonCharacter />
             </Suspense>
@@ -133,7 +136,7 @@ function App() {
               position={[-12.6, 1.4, 0]}
             />
             <Floor />
-          </Debug>
+          
         </Physics>
         <Lighting />
       </Canvas>
