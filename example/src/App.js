@@ -6,7 +6,6 @@ import ThirdPersonCharacterControls from "react-three-third-person";
 
 
 
-
 const BASE_ANIMATIONS_PATH =
   "./models";
 
@@ -108,7 +107,13 @@ function App() {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
        
-   
+       <div id='joystickWrapper0'>
+              <div id='mobileInterface' className='noSelect'>
+                <div id='joystickWrapper1'></div>
+
+                <div style={{ height: '100vh', width: '100%' }} />
+              </div>
+            </div>
       <Canvas
         flat
         camera={{

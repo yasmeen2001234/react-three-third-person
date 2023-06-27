@@ -24,7 +24,7 @@ const options = {
   zIndex: 9999,
   shape: 'circle',
   color: 'linear-gradient(to bottom, #ce09ff, #ffa34e)',
-  position: { bottom: '60px', left: '60px' },
+  position: { bottom: '0px', left: '0px' },
   dynamicPage: true,
   
 };
