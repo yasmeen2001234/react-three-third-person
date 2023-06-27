@@ -55,13 +55,19 @@ body,
   display: block;
   position: absolute;
   bottom: 0;
-  left: 0;
+  left: 70;
   background-color: transparent;
   width: 120px;
   height: 120px;
   z-index: 12;
   touch-action: manipulation;
   /* background-color: rgba(red, 0.2); */
+}
+
+#nipple_0_0{
+  position: absolute;
+  bottom: 0;
+  left: 70;
 }
 
 .noSelect {

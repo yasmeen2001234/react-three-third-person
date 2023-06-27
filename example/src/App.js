@@ -1,13 +1,10 @@
 import React, { Suspense } from "react";
 import { Canvas } from "@react-three/fiber";
 import { Physics, useBox } from "@react-three/cannon";
-import { useFBX } from '@react-three/drei'
+import { useFBX } from "@react-three/drei";
 import ThirdPersonCharacterControls from "react-three-third-person";
 
-
-
-const BASE_ANIMATIONS_PATH =
-  "./models";
+const BASE_ANIMATIONS_PATH = "./models";
 
 const animationPaths = {
   idle: `${BASE_ANIMATIONS_PATH}/Idle.fbx`,
@@ -18,16 +15,15 @@ const animationPaths = {
   backpedal: `${BASE_ANIMATIONS_PATH}/Walking_Backwards.fbx`,
   turnLeft: `${BASE_ANIMATIONS_PATH}/left_turn.fbx`,
   turnRight: `${BASE_ANIMATIONS_PATH}/right_turn.fbx`,
-
 };
 
 function ThirdPersonCharacter() {
   //const mannyObj = manny();
-  const characterObj = useFBX(`${BASE_ANIMATIONS_PATH}/Player_alone.fbx`)
-  characterObj.scale.setScalar(0.01)
-  characterObj.rotation.set(-3.14, 0, -3.14)
+  const characterObj = useFBX(`${BASE_ANIMATIONS_PATH}/Player_alone.fbx`);
+  characterObj.scale.setScalar(0.01);
+  characterObj.rotation.set(-3.14, 0, -3.14);
 
-  characterObj.position.set(0, -0.4, 0)
+  characterObj.position.set(0, -0.4, 0);
 
   return (
     <ThirdPersonCharacterControls
@@ -76,7 +72,7 @@ function Floor() {
     <group>
       <mesh ref={ref}>
         <boxGeometry name="floor-box" />
-        <meshPhongMaterial opacity={0} transparent color="black"/>
+        <meshPhongMaterial opacity={0} transparent color="black" />
       </mesh>
       <gridHelper args={[25, 25]} />
     </group>
@@ -106,14 +102,6 @@ function Wall({ args, ...props }) {
 function App() {
   return (
     <div style={{ height: "100vh", width: "100%" }}>
-       
-       <div id='joystickWrapper0'>
-              <div id='mobileInterface' className='noSelect'>
-                <div id='joystickWrapper1'></div>
-
-                <div style={{ height: '100vh', width: '100%' }} />
-              </div>
-            </div>
       <Canvas
         flat
         camera={{
@@ -124,27 +112,26 @@ function App() {
         }}
       >
         <Physics gravity={[0, -35, 0]}>
-          
-            <Suspense fallback={null}>
-              <ThirdPersonCharacter />
-            </Suspense>
-            <Wall args={[25, 3, 0.2]} position={[0, 1.4, -12.6]} />
-            <Wall args={[25, 3, 0.2]} position={[0, 1.4, 12.6]} />
-            <Wall
-              args={[25, 3, 0.2]}
-              rotation={[0, -Math.PI / 2, 0]}
-              position={[12.6, 1.4, 0]}
-            />
-            <Wall
-              args={[25, 3, 0.2]}
-              rotation={[0, -Math.PI / 2, 0]}
-              position={[-12.6, 1.4, 0]}
-            />
-            <Floor />
-          
+          <Suspense fallback={null}>
+            <ThirdPersonCharacter />
+          </Suspense>
+          <Wall args={[25, 3, 0.2]} position={[0, 1.4, -12.6]} />
+          <Wall args={[25, 3, 0.2]} position={[0, 1.4, 12.6]} />
+          <Wall
+            args={[25, 3, 0.2]}
+            rotation={[0, -Math.PI / 2, 0]}
+            position={[12.6, 1.4, 0]}
+          />
+          <Wall
+            args={[25, 3, 0.2]}
+            rotation={[0, -Math.PI / 2, 0]}
+            position={[-12.6, 1.4, 0]}
+          />
+          <Floor />
         </Physics>
         <Lighting />
       </Canvas>
+  
     </div>
   );
 }
