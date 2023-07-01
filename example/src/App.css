@@ -17,8 +17,8 @@ body,
   height: 50vh;
   pointer-events: none;
   z-index: 11;
-  bottom: 30px;
-  left: 30px;
+  bottom: 130px;
+  left: 130px;
   touch-action: manipulation;
 }
 
