@@ -21,10 +21,11 @@ const options = {
   maxNumberOfNipples: 1,
   mode: 'static',
   restJoystick: true,
+  zIndex: 9999,
   shape: 'circle',
   color: 'linear-gradient(to bottom, #ce09ff, #ffa34e)',
+  position: { bottom: '60px', left: '60px' },
   dynamicPage: true,
-  position: { top: '105px', left: '35px' },
   
 };
 
